@@ -1,12 +1,14 @@
 package com.example.demo.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -27,8 +29,35 @@ public class Employee implements Serializable {
 	@PrimaryKeyJoinColumn
 	private EmployeeDetail employeeDetail;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Department department;
+	
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	private List<Persmission> permissions;
+	
+	public EmployeeDetail getEmployeeDetail() {
+		return employeeDetail;
+	}
+
+	public void setEmployeeDetail(EmployeeDetail employeeDetail) {
+		this.employeeDetail = employeeDetail;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	public List<Persmission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<Persmission> permissions) {
+		this.permissions = permissions;
+	}
 
 	public Integer getId() {
 		return id;
